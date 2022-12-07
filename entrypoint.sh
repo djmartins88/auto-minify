@@ -48,11 +48,11 @@ minify() {
 	echo "Minify : $in -> $out"
 
 	if [[ $in == *.html ]]; then
-		npx html-minifier-terser $in --collapse-whitespace --remove-comments true
+		npx html-minifier-terser $in --collapse-whitespace --remove-comments > $out
 	elif [[ $in == *.js ]]; then
-		npx terser $in --compress --mangle --minify-js true --output $out
+		npx terser $in --compress --mangle --minify-js --toplevel > $out
 	elif [[ $in == *.css ]]; then
-		npx html-minifier-terser $in --collapse-whitespace --remove-comments true
+		npx html-minifier-terser $in --collapse-whitespace --remove-comments > $out
 	fi
 }
 
@@ -78,6 +78,5 @@ file_set=$({
 
 # look for files with the specified extensions
 for file in $file_set; do
-	echo "Minifying: $file -> $out"
 	minify $file
 done
