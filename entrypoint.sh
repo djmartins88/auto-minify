@@ -52,20 +52,19 @@ minify () {
 
 	echo "Minify : $in -> $o_file"
 
-	if [ $in == *.html ]; then
+	if [[ $in == *.html ]]; then
 		npx html-minifier-terser "$in" --collapse-whitespace --remove-comments > $o_file
-	elif [ $in == *.js ]; then
+	elif [[ $in == *.js ]]; then
 		npx terser "$in" --compress --mangle --minify-js --toplevel > $o_file
-	elif [ $in == *.css ]; then
+	elif [[ $in == *.css ]]; then
 		npx html-minifier-terser "$in" --collapse-whitespace --remove-comments > $o_file
 	fi
 
-    echo "minified."
 }
 
 # echo "local-dbug: $LOCAL_DEBUG"
-echo "input: $INPUT_INPUT"
-echo "output: $INPUT_OUTPUT"
+# echo "input: $INPUT_INPUT"
+# echo "output: $INPUT_OUTPUT"
 
 wf=""
 if [ -z ${LOCAL_DEBUG+x} ]; then
