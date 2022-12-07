@@ -60,7 +60,7 @@ cd /app/
 
 dir="/github/workspace"
 
-input="$dir/$INPUT_DIRECTORY"
+input="$dir/$INPUT_INPUT"
 output="$dir/$INPUT_OUTPUT"
 
 # create output folder if it doesn't exist
