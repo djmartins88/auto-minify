@@ -1,18 +1,14 @@
 #!/bin/bash -l
 
 get_files () {
-	'
-	gets the list of files to minimize, ignore output folder
-	'
-
-	'find "app/assets/" -path "app/assets/min" -prune -o -name "*.html" -print'
+	# gets the list of files to minimize, ignore output folder
+	# find "app/assets/" -path "app/assets/min" -prune -o -name "*.html" -print'
 	find $input -path $output -prune -o -name "*.$1" -print
 }
 
 get_output_file () {
-	'
-	gets the name of the output file 
-	'
+	#gets the name of the output file 
+	
 	f_name=$( basename $1 | grep -oP '^.*(?=\.)' )
     # file extension
     f_extn=$( basename $1 | grep -oP '\.[^\.]*$' )
@@ -22,6 +18,8 @@ get_output_file () {
     o_dir=${f_dir//$input/}
 
     o_file=""
+
+	echo "o_dir: $o_dir\n"
 
     # if o_dir is same as f_dir, replace was not possible which means no "o_dir" is not needed
     if [ "$o_dir" != "$f_dir" ]; then
@@ -45,7 +43,7 @@ minify() {
 	in=$( readlink -m $1 )
 	out=$( get_output_file $file )
 
-	echo "Minify : $in -> $out"
+	echo "Minify : $in -> $out\n"
 
 	if [[ $in == *.html ]]; then
 		npx html-minifier-terser $in --collapse-whitespace --remove-comments > $out
@@ -62,6 +60,9 @@ dir="/github/workspace"
 
 input="$dir/$INPUT_INPUT"
 output="$dir/$INPUT_OUTPUT"
+
+echo "minimizing files found on $input\n"
+echo "writing results to $output\n"
 
 # create output folder if it doesn't exist
 if [ ! -z $output ]; then
