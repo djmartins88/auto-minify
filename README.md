@@ -1,2 +1,2 @@
 # auto-minify
-Minifies HTML, JS, and CSS files
+Minifies HTML, JS, and CSS files with Terser

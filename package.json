@@ -1,0 +1,14 @@
+{
+	"name": "auto-minify",
+	"repository": "djmartins88/auto-minify",
+	"homepage": "https://github.com/djmartins88/auto-minify",
+	"dependencies": {
+		"terser": "^5.16.1",
+		"html-minifier-terser": "^7.1.10"
+	},
+	"author": {
+		"name": "David Martins",
+		"email": "djmartins.dev@gmail.com",
+		"url": "https://github.com/djmartins88"
+	}
+}

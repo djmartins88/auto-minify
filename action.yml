@@ -1,0 +1,20 @@
+name: "Auto Minify"
+description: "Minifies HTML, JS, and CSS files with Terser"
+
+author: "David Martins <djmartins.dev@gmail.com>"
+
+inputs:
+  input:
+    description: "Input folder for the minified files"
+    required: true
+  output:
+    description: "Output folder for the minified files"
+    required: true
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "archive"
+  color: "purple"
