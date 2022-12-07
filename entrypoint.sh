@@ -19,8 +19,6 @@ get_output_file () {
 
     o_file=""
 
-	echo "o_dir: $o_dir\n"
-
     # if o_dir is same as f_dir, replace was not possible which means no "o_dir" is not needed
     if [ "$o_dir" != "$f_dir" ]; then
         
@@ -35,15 +33,21 @@ get_output_file () {
         o_file=$(echo "$output/$f_name.min$f_extn")
     fi
 
+	echo "input folder: $input    output folder: $output"
+    echo "relative file: $1       input_f: $input"
+    echo "file name: $f_name      file ext: $f_extn"
+    echo "file folder: $f_dir"
+    echo "relative output folder path: $o_dir"
+
 	echo $o_file
 }
 
 minify() {
 
 	in=$( readlink -m $1 )
-	out=$( get_output_file $file )
+	out=$( readlink -m $2 )
 
-	echo "Minify : $in -> $out\n"
+	echo "Minify : $in -> $out"
 
 	if [[ $in == *.html ]]; then
 		npx html-minifier-terser $in --collapse-whitespace --remove-comments > $out
@@ -61,8 +65,8 @@ dir="/github/workspace"
 input="$dir/$INPUT_INPUT"
 output="$dir/$INPUT_OUTPUT"
 
-echo "minimizing files found on $input\n"
-echo "writing results to $output\n"
+echo "minimizing files found on $input"
+echo "writing results to $output"
 
 # create output folder if it doesn't exist
 if [ ! -z $output ]; then
@@ -79,5 +83,5 @@ file_set=$({
 
 # look for files with the specified extensions
 for file in $file_set; do
-	minify $file
+	minify $file $( get_output_file $file )
 done
